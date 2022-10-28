@@ -1,0 +1,60 @@
+
+<div class="container">
+    <form #stockForm="ngForm" (ngSubmit)="fetchStocksData(stockForm.value)">
+        <br>
+        <h3>View stocks data!</h3>
+        <div class="form-group" style="margin-bottom: 50px;">
+            <div class="row">
+                <span class="alert alert-danger" *ngIf="message"> 
+                    <strong>{{message}}</strong>
+                </span> 
+                <div class="col-md-3">
+                    <label for="company" class="control-label">Company:</label>
+                    <select id="cmpnyCode" class="form-select" required name="companyCode" [(ngModel)]="companyCode" (change)="getCompanyById(companyCode)">
+                        <option value="-1">--Select Company--</option>
+                        <option *ngFor="let c of companies" value={{c.companyCode}}>{{c.companyName}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="startDate" class="control-label">Start Date:</label>
+                    <input type="date" id="startDateId" name="startDate" class="form-control" [(ngModel)]="startDate">
+                </div>
+                <div class="col-md-3">
+                    <label for="endDate" class="control-label">End Date:</label>
+                    <input type="date" id="endDateId" name="endDate" class="form-control" [(ngModel)]="endDate">
+                </div>
+            </div>
+            <br>
+            <input type="submit" value="Fetch" class="btn btn-primary" style="background-color: #1976d2;"/>
+        </div>
+    </form>
+    <div id="stocksDiv" *ngIf="showTbl==true">
+        <div class="row">
+            <table id="stockTbl" class="Tbl">
+                <tr>
+                    <th>Stock Price</th><th>Date</th><th>Time</th>
+                </tr>
+                <tr *ngFor="let s of stocks">
+                    <td>{{s.stockPrice}}</td><td>{{s.date|date}}</td><td>{{s.date|date:'h:mm:ss a'}}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <table class="Tbl" align="center">
+                <tr>
+                    <td>Minimum value</td><td>{{minValue}}</td>
+                </tr>
+                <tr>
+                    <td>Maximum value</td><td>{{maxValue}}</td>
+                </tr>
+                <tr>
+                    <td>Average value</td><td>{{avgValue | number: '.3-3'}}</td>
+                </tr>
+            </table>
+        </div>            
+    </div>
+    <br>
+    <br>
+</div>
+

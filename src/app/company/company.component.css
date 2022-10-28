@@ -1,0 +1,26 @@
+input .ng-invalid.ng-touched{
+    border:red 1px solid;
+}
+small{
+    color:red;
+}
+input .form-control ng-untouched ng-pristine ng-invalid{
+    border:red 1px solid;
+}
+#companyTbl td, #companyTbl th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#companyTbl tr:nth-child(even){background-color: #f2f2f2;}
+
+#companyTbl tr:hover {background-color: #ddd;}
+
+#companyTbl th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1976d2;
+    color: white;
+}
+

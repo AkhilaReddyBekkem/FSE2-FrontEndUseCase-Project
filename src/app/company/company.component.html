@@ -1,0 +1,113 @@
+
+<div class="container" style="margin-left: 15px;margin-bottom: 30px;">
+    
+    <div class="form" style="margin-bottom: 30px;">
+        <form #companyForm="ngForm" (ngSubmit)="addCompany(companyForm.value)">
+            <div style="margin-bottom:20px;margin-top: 20px;">
+                <div >
+                    <h3 class="panel-title">Add new company here!</h3>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <!-- <span class="help-block" *ngIf="(companyForm.invalid && companyForm.touched)">
+                            <strong>Please provide all inputs to add new company!</strong>
+                        </span>  -->
+                        <br><br>
+                        <!-- <label type="text" class="form-control" id="errorMsg" name="message" [(ngModel)]="message" #errorMessageVal="ngModel" ></label>  -->                                        
+                        <span class="alert alert-success" *ngIf="successMessage"> 
+                            <strong>{{successMessage}}</strong>
+                        </span> 
+                        <span class="alert alert-danger" *ngIf="errorMessage">
+                            <strong>{{errorMessage}}</strong>
+                        </span>
+                        <div class="col-md-4" >
+                            <label for="companyCodeLbl" class="control-label">Company Code</label>
+                            <input type="text" class="form-control" id="companyCode" name="companyCode" [(ngModel)]="companyCode" #companyCodeInput="ngModel" required />
+                            <span class="help-block" *ngIf="companyCodeInput.invalid && companyCodeInput.touched">
+                                <small>Company Code is required!</small>
+                            </span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="companyNameLbl">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" name="companyName" [(ngModel)]="companyName" #companyNameInput="ngModel"  required />                        
+                            <span class="help-block" *ngIf="companyNameInput.invalid && companyNameInput.touched">
+                                <small>Company Name is required!</small>
+                            </span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="companyCeoLbl">Company CEO</label>
+                            <input type="text" class="form-control" id="companyCEO" name="companyCEO" [(ngModel)]="companyCEO" #companyCeoInput="ngModel" required />                        
+                            <span class="help-block" *ngIf="companyCeoInput.invalid && companyCeoInput.touched">
+                                <small>Company CEO is required!</small>
+                            </span>
+                        </div>
+                        <div><br></div>
+                        
+                        <div class="col-md-4">
+                            <label for="turnOverLbl">TurnOver(Cr)</label>
+                            <input type="number" class="form-control" id="turnOver" name="turnOver" [(ngModel)]="turnOver" #turnOverInput="ngModel"  required />                       
+                            <span class="help-block" *ngIf="turnOverInput.invalid && turnOverInput.touched">
+                                <small>TurnOver is required!</small>
+                            </span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="stockExchangeLbl">StockExchange</label>
+                            <select id="stockExchange" class="form-control" required name="stockExchange" [(ngModel)]="stockExchange" #stockExchangeInput="ngModel">
+                                <option value="-1" selected>--Select Company--</option>
+                                <option value="BSE">BSE</option>
+                                <option value="NSE">NSE</option>
+                            </select>
+                            <span class="help-block" *ngIf="stockExchange=='-1' && stockExchangeInput.touched">
+                                <small>StockExchange is required!</small>
+                            </span>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div>  
+                <input type="submit" value="Add" class="btn btn-primary" style="background-color: #1976d2;" />
+            </div>  
+        </form>
+    </div>
+    <div>
+        <h3>View EStock data of companies here!</h3>
+        <div class="col-md-3" style="margin-bottom: 20px;">
+            <span class="alert alert-info" *ngIf="infoMessage">
+                <strong>{{infoMessage}}</strong>
+            </span>
+            <label for="company" class="control-label">Company:</label>
+            <select id="cmpnyCode" class="form-select" required name="CompanyName" [(ngModel)]="cmpnyCode" (change)="getCompanyById(cmpnyCode)">
+                <option value="-1">--Select Company--</option>
+                <option value="All">All</option>
+                <option *ngFor="let c of companies" value={{c.companyCode}}>{{c.companyName}}</option>
+            </select>
+        </div>
+        <div id="companyListDiv" class="row" *ngIf = "cmpnyCode!='' && cmpnyCode!='-1'">
+            <table id="companyTbl">
+                <tr>
+                    <th>Company Code</th><th>Company Name</th><th>Company CEO</th>
+                    <th>TurnOver(Cr)</th><th>Stock Exchange</th>
+                </tr>
+                <tr *ngFor="let cmp of companyById">
+                    <td>{{cmp.companyCode}}</td><td>{{cmp.companyName}}</td>
+                    <td>{{cmp.companyCEO}}</td><td>{{cmp.turnOver}}</td>
+                    <td>{{cmp.stockExchange}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+<br>
+<br>
+<br>
+
+
+
+
+
+
