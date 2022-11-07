@@ -74,10 +74,11 @@
           "configurations": {
             "production": {
               "browserTarget": "EStockApp:build:production"
+       
             },
             "development": {
-              "browserTarget": "EStockApp:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "browserTarget": "EStockApp:build:development"
+              
             }
           },
           "defaultConfiguration": "development"

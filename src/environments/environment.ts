@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  backend: {
+    baseURL:"https://companyservice20221104170231.azurewebsites.net/api/v1.0/market/",
+    baseURLStocks : "https://stockserviceresource.azurewebsites.net/api/v1.0/market/"
+  }
 };
 
 /*

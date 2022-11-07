@@ -1,9 +1,19 @@
+
+
 {
-    "/api": {
-      "target": "http://localhost:38855",
-      "secure": false,
-      "changeOrigin":true,
-      "logLevel":"debug",
-      "pathRewrite":{"^/api":"http://localhost:38855"}
-    }
+  
+  "/apiUrlStocks": {
+    "target": "https://stockserviceresource.azurewebsites.net",
+    "secure": false,
+    "changeOrigin":true,
+    "logLevel":"debug",
+    "pathRewrite":{"^/apiUrlStocks":"https://stockserviceresource.azurewebsites.net"}
+  },
+  "/apiUrl": {
+    "target": "https://companyservice20221104170231.azurewebsites.net",
+    "secure": false,
+    "changeOrigin":true,
+    "logLevel":"debug",
+    "pathRewrite":{"^/apiUrl":"https://companyservice20221104170231.azurewebsites.net"}
   }
+}

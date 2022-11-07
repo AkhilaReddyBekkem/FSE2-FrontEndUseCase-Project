@@ -4,9 +4,15 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Time } from '@angular/common';
+import { environment } from 'src/environments/environment.prod';
 
-const endpoint = 'http://localhost:38855/';
-// const endpointStocks = 'http://localhost:19577/api/v1.0/market/Stock/';
+
+//const endpoint = 'http://localhost:38855/';
+//const endpoint = 'https://companyservice20221104170231.azurewebsites.net/api/v1.0/market/';
+//const endpointStocks = 'http://localhost:19577/api/v1.0/market/Stock/';
+//const endpointStocks = 'https://stockserviceresource.azurewebsites.net/api/v1.0/market/Stock/';
+const endpointStocks = environment.backend.baseURLStocks;
+const endpoint = environment.backend.baseURL;
 
 export interface Company {
   companyCode: string;
@@ -40,30 +46,39 @@ export class CompanyService {
   }
 
   getAllCompany(): Observable<any> {
-    return this.http.get<Company[]>(/api/ + 'Company')
+    // return this.http.get<Company[]>(/apiUrl/ + 'api/v1.0/market/Company/getAll')
+    // .pipe(catchError(this.handleError));
+    // return this.http.get<Company[]>(endpoint + 'Company/getAll')
+    // .pipe(catchError(this.handleError));
+    return this.http.get<Company[]>(endpoint + '/Company/getAll')
     .pipe(catchError(this.handleError));
-
   }
   getAllCompanyById(companycode: string):Observable<any>{
-    return this.http.get<Company[]>(/api/ + 'Company/' + companycode)
+    return this.http.get<Company[]>(endpoint + '/Company/info/' + companycode)
     .pipe(catchError(this.handleError));
+    // return this.http.get<Company[]>(endpoint + 'Company/info/' + companycode)
+    // .pipe(catchError(this.handleError));
   }
 
   addNewCompany(Company: Company): Observable<any> {
-    return this.http.post(/api/ + 'Company', Company);
+    return this.http.post(endpoint + '/Company/register/', Company);
     //Error handling done in typescript file.
   }
-  deleteCompany(companycode: string):Observable<any>{
-    return this.http.delete(/api/ + 'Company/' + companycode).pipe(
-      catchError(this.handleError));
-  }
+  // deleteCompany(companycode: string):Observable<any>{
+  //   return this.http.delete(/api/ + 'Company/' + companycode).pipe(
+  //     catchError(this.handleError));
+  // }
 
   getStockDetails(companycode: string,startDate:Date, EndDate:Date):Observable<any>{
-      return this.http.get(/api/ + 'Stock/' + companycode + '/' + startDate + '/' + EndDate);  
+      //return this.http.get(/api/ + 'Stock/' + companycode + '/' + startDate + '/' + EndDate);  
+      return this.http.get(endpointStocks + '/Stock/Get/' + companycode + '/' + startDate + '/' + EndDate); 
   }
 
   addStocks(stocksData: any): Observable<any> {
-    return this.http.post(/api/ + 'Stock', stocksData).pipe(
+    // return this.http.post(/api/ + 'Stock', stocksData).pipe(
+    //   catchError(this.handleError)
+    // );
+    return this.http.post(endpointStocks + '/Stock/add', stocksData).pipe(
       catchError(this.handleError)
     );
   }
